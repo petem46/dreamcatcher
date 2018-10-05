@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Student;
+use App\Ambition;
 use Illuminate\Http\Request;
 
 class StudentController extends Controller
@@ -56,7 +57,8 @@ class StudentController extends Controller
     public function show($id)
     {
         $data = [
-            'students'    => Student::with('results')->where('students.id', $id)->get(),
+            'student'    => Student::where('students.id', $id)->first(),
+            'ambition'    => Ambition::where('ambitions.student_id', $id)->get(),
         ];
         return view('students.show', $data);
     }
